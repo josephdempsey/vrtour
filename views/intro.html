@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Pick a tour</title>
+    <meta name="description" content="A-Frame">
+    <script src="https://aframe.io/releases/0.2.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/ngokevin/aframe-text-component/master/dist/aframe-text-component.min.js"></script>
+    <script>
+        AFRAME.registerComponent('set-pos', {
+            schema: {default:''},
+            init() {
+                const player = document.querySelector('#player');
+                this.el.addEventListener('click', () => {
+                    player.setAttribute('position', this.data);
+            });
+            }
+        });
+
+        document.querySelector('#finish').addEventListener('click', function () {
+            alert('Finish!');
+        });
+
+        $(document).ready(function() {
+            setTimeout(function() {
+                $(".a-enter-vr").trigger('click');
+            },100);
+        });
+
+
+    </script>
+</head>
+<body>
+
+<a-scene>
+
+    <a-assets>
+        <a-mixin
+                id="p_point"
+                geometry="primitive: box;width:0.2;height:0.2;depth: 0.2"
+                material="color: #FFF59D">
+        </a-mixin>
+        <a-mixin
+                id="f_point"
+                geometry="primitive: box;width:0.6;height:0.1;depth: 0.6"
+                material="color: #9CCC65">
+        </a-mixin>
+        <img id="ui1" src="ui-1.png">
+        <img id="ui2" src="ui-2.png">
+        <img id="ui3" src="ui-3.png">
+    </a-assets>
+
+    <a-sky src="gradient.jpg" rotation="0 -130 0"></a-sky>
+
+
+    <a-plane rotation="-90 0 0" width="10" height="10" color="#146b28"></a-plane>
+
+    <a-entity position="0 1 0">
+
+
+        <a-entity id="player" camera look-controls>
+
+            <a-entity position="0 0 -1"
+                      geometry="primitive: ring; radiusOuter: 0.03;radiusInner: 0.02;"
+                      material="color: #222; shader: flat"
+                      cursor="maxDistance: 30; fuse: true">
+                <a-animation
+                        begin="click"
+                        attribute="scale"
+                        from="0.1 0.1 0.1"
+                        to="1 1 1"
+                        dur="150">
+                </a-animation>
+                <a-animation
+                        begin="fusing"
+                        attribute="scale"
+                        from="1 1 1"
+                        to="0.1 0.1 0.1"
+                        dur="1500">
+                </a-animation>
+            </a-entity>
+        </a-entity>
+    </a-entity>
+
+    <a-entity position="0 0 -3" set-pos="0 0.5 -2" mixin="p_point"></a-entity>
+    <a-entity position="0 0 4" set-pos="0 0.5 3" mixin="p_point"></a-entity>
+    <a-entity position="4 0 0" set-pos="3 0.5 0" mixin="p_point"></a-entity>
+    <a-entity position="-4 0 0" set-pos="-3 0.5 0" mixin="p_point"></a-entity>
+
+    <a-entity position="4 0 4" mixin="f_point" id="finish"></a-entity>
+
+    <a-entity text="text: Pick a destination" material="color: #7986CB" position="-2 1.5 -10"></a-entity>
+
+    <a-entity text="text: Take a trip" material="color: #7986CB" position="-10 2 4" rotation="0 90 0"></a-entity>
+    <a-entity text="text:  to Egypt" material="color: #7986CB" position="-10 1 4" rotation="0 90 0"></a-entity>
+    <a-entity text="text: Visit London" material="color: #7986CB" position="10 2 0" rotation="0 -90 0"></a-entity>
+    <a-entity text="text: " material="color: #7986CB" position="10 1 0" rotation="0 -90 0"></a-entity>
+
+    <a-curvedimage src="#mozvr" radius="5.7" theta-length="17" height=".36"
+                   opacity="0.2" rotation="0 250 0" position="0 2 0"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 80 0" position="0 1 0" scale="0.3 0.3 0.3"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 80 0" position="0 2 0" scale="0.3 0.3 0.3"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 80 0" position="0 3 0" scale="0.3 0.3 0.3"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 80 0" position="0 4 0" scale="0.3 0.3 0.3"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 80 0" position="0 5 0" scale="0.3 0.3 0.3"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 80 0" position="0 6 0" scale="0.3 0.3 0.3"></a-curvedimage>
+
+    <a-curvedimage src="#mozvr" radius="5.7" theta-length="17" height=".36"
+                                                                                                             opacity="0.2" rotation="0 250 0" position="0 2 0"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 80 0" position="0 1 2" scale="0.3 0.3 0.3"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 80 0" position="0 2 2" scale="0.3 0.3 0.3"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 80 0" position="0 3 2" scale="0.3 0.3 0.3"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 80 0" position="0 4 2" scale="0.3 0.3 0.3"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 80 0" position="0 5 2" scale="0.3 0.3 0.3"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 80 0" position="0 6 2" scale="0.3 0.3 0.3"></a-curvedimage>
+
+    <a-curvedimage src="#mozvr" radius="5.7" theta-length="17" height=".36"
+                   opacity="0.2" rotation="0 250 0" position="0 2 0"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 10 0" position="0 1 4" scale="0.3 0.3 0.3"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 20 0" position="0 2 4" scale="0.3 0.3 0.3"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 30 0" position="0 3 4" scale="0.3 0.3 0.3"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 50 0" position="0 4 4" scale="0.3 0.3 0.3"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 50 0" position="0 5 4" scale="0.3 0.3 0.3"></a-curvedimage>
+    <a-curvedimage src="#ui3" radius="11.7" theta-length="20" height="2.6"
+                   rotation="0 50 0" position="0 6 4" scale="0.3 0.3 0.3"></a-curvedimage>
+
+
+
+
+
+    <a-image position="0 -5 0" src="#shadow2" rotation="-90 0 0" scale="6 6 6"></a-image>
+
+
+</a-scene>
+</body>
+</html>
